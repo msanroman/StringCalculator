@@ -32,3 +32,8 @@ Feature: String Calculator
 		Given I grab my calculator
 		When I ask for the sum of "1\n2\n3"
 		Then the result of its sum should be 6
+
+	Scenario: It should be able to support new delimiters
+		Given I grab my calculator
+		When I ask for the sum of "//;\n1;2"
+		Then the result of its sum should be 3
