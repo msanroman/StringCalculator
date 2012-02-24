@@ -3,7 +3,7 @@ class StringCalculator
 
 	def add(numbers)
 
-		if numbers.include? ','
+		if numbers.include? ',' or numbers.include? '\n'
 			numbers_splitted = getNumbersSplitted(numbers)
 			sum = numbers_splitted.reduce(:+)
 		end
@@ -15,6 +15,10 @@ class StringCalculator
 	private
 	def getNumbersSplitted(numbers)
 
-		numbers.split(',').collect{|number| number.to_i}
+		numbers.split(',').collect { |elements|
+			elements.split('\n')
+		}.reduce(:+).collect { |number|
+			number.to_i
+		}
 	end
 end

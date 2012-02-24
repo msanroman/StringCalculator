@@ -28,3 +28,7 @@ Feature: String Calculator
 		| "5,7"	|	12	|
 		| "10,5"|	15	|
 
+	Scenario: I tell the numbers dividing by commas or by new lines
+		Given I grab my calculator
+		When I ask for the sum of "1\n2\n3"
+		Then the result of its sum should be 6
