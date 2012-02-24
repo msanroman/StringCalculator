@@ -11,6 +11,6 @@ When /^I ask for the sum of "([^"]*)"$$/ do |numbers|
 	@result = @calculator.add(numbers)
 end
 
-Then /^the result of its sum is (\d+)$/ do |sum|
+Then /^the result of its sum should be (\d+)$/ do |sum|
 	@result.should == sum.to_i
 end
