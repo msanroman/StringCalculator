@@ -4,8 +4,7 @@ class StringCalculator
 	def add(numbers)
 
 		numbers_splitted = NumberCollection.new(numbers.split!)
-		sum = numbers_splitted.add
-		return sum
+		return numbers_splitted.add
 	end
 end
 
@@ -79,7 +78,6 @@ class String
 
 		CUSTOM_DELIMITER_SUFFIX.length
 	end
-
 end
 
 class Delimiters < Array

@@ -6,8 +6,8 @@ end
 When /^I ask for the sum of "([^"]*)"$$/ do |numbers|
 	begin
 		@result = @calculator.add(numbers) 
-	rescue => e 
-		@exception = e
+	rescue => exception 
+		@exception = exception
 	end
 end
 
