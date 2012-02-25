@@ -49,7 +49,12 @@ I want to be told the sum of some numbers.
     | "54,-22"        | "negatives not allowed: -22" |
     | "54,-22,-1,-100"| "negatives not allowed: -22" |
 
-  Scenario: Numbers bigger than 1000 should be ignored
+  Scenario Outline: Numbers bigger than 1000 should be ignored
     Given I grab my calculator
-    When I ask for the sum of "2,1001"
-    Then the result of its sum should be 2
+    When I ask for the sum of <numbers>
+    Then the result of its sum should be <result>
+    Examples:
+    | numbers    | result  |
+    | "2,1001"   | 2       |
+    | "2000,100" | 100     |
+    | "1001,1001"| 0       |
