@@ -1,96 +1,96 @@
 
 class StringCalculator
 
-	def add(numbers)
+  def add(numbers)
 
-		numbers_splitted = NumberCollection.new(numbers.split!)
-		return numbers_splitted.add
-	end
+    numbers_splitted = NumberCollection.new(numbers.split!)
+    return numbers_splitted.add
+  end
 end
 
 class NumberCollection < Array
 
-	def initialize(numbers)
-		
-		numbers.each{ |number|
-			self << number
-			raise "negatives not allowed: #{number}" if number.isNegative?
-		}
-	end
+  def initialize(numbers)
+    
+    numbers.each{ |number|
+      self << number
+      raise "negatives not allowed: #{number}" if number.isNegative?
+    }
+  end
 
-	def add
+  def add
 
-		if smallEnough.empty?
-			sum = 0
-		else sum = smallEnough.reduce(:+)
-		end
-		return sum
-	end
+    if smallEnough.empty?
+      sum = 0
+    else sum = smallEnough.reduce(:+)
+    end
+    return sum
+  end
 
-	def smallEnough
+  def smallEnough
 
-		self.select{|number| not number.isTooBig?}
-	end
+    self.select{|number| not number.isTooBig?}
+  end
 end
 
 class Integer
 
-	NUMBER_TOO_BIG = 1001
+  NUMBER_TOO_BIG = 1001
 
-	def isTooBig?
+  def isTooBig?
 
-		self >= NUMBER_TOO_BIG
-	end
+    self >= NUMBER_TOO_BIG
+  end
 
-	def isNegative?
+  def isNegative?
 
-		self < 0
-	end
+    self < 0
+  end
 end
 
 class String
 
-	CUSTOM_DELIMITER_PREFIX = '//'
-	CUSTOM_DELIMITER_SUFFIX = '\n'
+  CUSTOM_DELIMITER_PREFIX = '//'
+  CUSTOM_DELIMITER_SUFFIX = '\n'
 
-	def split!
+  def split!
 
-		regular_expression = Regexp.new(Delimiters.new(self).to_s)
-		self.split(regular_expression).collect { |number|
-			number.to_i
-		}
-	end
+    regular_expression = Regexp.new(Delimiters.new(self).to_s)
+    self.split(regular_expression).collect { |number|
+      number.to_i
+    }
+  end
 
-	def hasCustomDelimiter?
+  def hasCustomDelimiter?
 
-		self.start_with?(CUSTOM_DELIMITER_PREFIX)
-	end
+    self.start_with?(CUSTOM_DELIMITER_PREFIX)
+  end
 
-	def delimiter
+  def delimiter
 
-		self[custom_delimiter_start..custom_delimiter_end]
-	end
+    self[custom_delimiter_start..custom_delimiter_end]
+  end
 
-	def custom_delimiter_start
+  def custom_delimiter_start
 
-		CUSTOM_DELIMITER_PREFIX.length
-	end
+    CUSTOM_DELIMITER_PREFIX.length
+  end
 
-	def custom_delimiter_end
+  def custom_delimiter_end
 
-		CUSTOM_DELIMITER_SUFFIX.length
-	end
+    CUSTOM_DELIMITER_SUFFIX.length
+  end
 end
 
 class Delimiters < Array
 
-	VALID_DELIMITERS = [',','\n']
+  VALID_DELIMITERS = [',','\n']
 
-	def initialize(string)
+  def initialize(string)
 
-		VALID_DELIMITERS << string.delimiter if string.hasCustomDelimiter?
-		VALID_DELIMITERS.each { |delimiter|
-			 self << delimiter
-		}
-	end
+    VALID_DELIMITERS << string.delimiter if string.hasCustomDelimiter?
+    VALID_DELIMITERS.each { |delimiter|
+     self << delimiter
+   }
+ end
 end

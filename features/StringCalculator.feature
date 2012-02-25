@@ -1,7 +1,7 @@
 Feature: String Calculator
-	In order to avoid maximum embarrassment
-	As a math idiot
-	I want to be told the sum of some numbers.
+In order to avoid maximum embarrassment
+As a math idiot
+I want to be told the sum of some numbers.
 
 	Scenario: I don't tell any number
 		Given I grab my calculator
@@ -43,10 +43,10 @@ Feature: String Calculator
 		When I ask for the sum of <numbers>
 		Then an exception saying <message> should be risen
 		Examples:
-		| 	numbers 		| 		message 			   |
-		|	"-1,2"			| "negatives not allowed: -1"  |
-		|	"-10,24"		| "negatives not allowed: -10" |
-		|	"54,-22"		| "negatives not allowed: -22" |
+		| 	numbers 			| 		message 							   |
+		|	"-1,2"					| "negatives not allowed: -1"  |
+		|	"-10,24"				| "negatives not allowed: -10" |
+		|	"54,-22"				| "negatives not allowed: -22" |
 		|	"54,-22,-1,-100"| "negatives not allowed: -22" |
 
 	Scenario: Numbers bigger than 1000 should be ignored

@@ -16,5 +16,5 @@ Then /^the result of its sum should be (\d+)$/ do |sum|
 end
 
 Then /^an exception saying "([^"]*)" should be risen$/ do |message|
-	@exception.message.should == message
+@exception.message.should == message
 end
