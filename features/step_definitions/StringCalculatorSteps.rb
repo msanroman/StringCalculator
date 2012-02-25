@@ -3,14 +3,18 @@ Given /^I grab my calculator$/ do
 	@calculator = StringCalculator.new
 end
 
-Given /^I only tell one number$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
 When /^I ask for the sum of "([^"]*)"$$/ do |numbers|
-	@result = @calculator.add(numbers)
+	begin
+		@result = @calculator.add(numbers) 
+	rescue => e 
+		@exception = e
+	end
 end
 
 Then /^the result of its sum should be (\d+)$/ do |sum|
 	@result.should == sum.to_i
+end
+
+Then /^an exception saying "([^"]*)" should be risen$/ do |message|
+	@exception.message.should == message
 end

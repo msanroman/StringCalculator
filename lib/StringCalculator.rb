@@ -1,18 +1,47 @@
 
 class StringCalculator
 
-
 	def add(numbers)
 
-		if numbers.areDelimited?
-			numbers_splitted = numbers.split!
-			sum = numbers_splitted.reduce(:+)
-		end
-		sum = 0 if numbers.empty?
-		sum = numbers.to_i if sum.nil?
+		numbers_splitted = NumberCollection.new(numbers.split!)
+		sum = numbers_splitted.add
 		return sum
 	end
+end
 
+class NumberCollection < Array
+
+	NUMBER_TOO_BIG = 1000
+
+	def initialize(numbers)
+		
+		numbers.each{ |number|
+			self << number
+			raise "negatives not allowed: #{number}" if number < 0
+		}
+	end
+
+	def add
+
+		smallEnough.inject(0){|result, number| 
+				result += number
+		}
+	end
+
+	def smallEnough
+
+		self.select{|number| not number.isTooBig?}
+	end
+end
+
+class Integer
+
+	NUMBER_TOO_BIG = 1001
+
+	def isTooBig?
+
+		self >= NUMBER_TOO_BIG
+	end
 end
 
 class String
@@ -71,5 +100,4 @@ class Delimiters < Array
 			 self << delimiter
 		}
 	end
-
 end

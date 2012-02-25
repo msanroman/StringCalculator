@@ -37,3 +37,13 @@ Feature: String Calculator
 		Given I grab my calculator
 		When I ask for the sum of "//;\n1;2"
 		Then the result of its sum should be 3
+
+	Scenario: It should throw an exception if passed negatives
+		Given I grab my calculator
+		When I ask for the sum of "-1,2"
+		Then an exception saying "negatives not allowed: -1" should be risen
+
+	Scenario: Numbers bigger than 1000 should be ignored
+		Given I grab my calculator
+		When I ask for the sum of "2,1001"
+		Then the result of its sum should be 2
