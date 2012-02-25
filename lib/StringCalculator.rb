@@ -20,9 +20,11 @@ class NumberCollection < Array
 
 	def add
 
-		smallEnough.inject(0){|result, number| 
-				result += number
-		}
+		if smallEnough.empty?
+			sum = 0
+		else sum = smallEnough.reduce(:+)
+		end
+		return sum
 	end
 
 	def smallEnough
