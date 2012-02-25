@@ -11,13 +11,11 @@ end
 
 class NumberCollection < Array
 
-	NUMBER_TOO_BIG = 1000
-
 	def initialize(numbers)
 		
 		numbers.each{ |number|
 			self << number
-			raise "negatives not allowed: #{number}" if number < 0
+			raise "negatives not allowed: #{number}" if number.isNegative?
 		}
 	end
 
@@ -42,22 +40,17 @@ class Integer
 
 		self >= NUMBER_TOO_BIG
 	end
+
+	def isNegative?
+
+		self < 0
+	end
 end
 
 class String
 
 	CUSTOM_DELIMITER_PREFIX = '//'
 	CUSTOM_DELIMITER_SUFFIX = '\n'
-
-	def areDelimited?
-
-		delimiters = Delimiters.new(self)
-		delimiters.each{ | delimiter |
-
-			return true if self.include? delimiter 
-		}
-		return false
-	end
 
 	def split!
 
@@ -69,7 +62,7 @@ class String
 
 	def hasCustomDelimiter?
 
-		self.index(CUSTOM_DELIMITER_PREFIX) == 0
+		self.start_with?(CUSTOM_DELIMITER_PREFIX)
 	end
 
 	def delimiter
